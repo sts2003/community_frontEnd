@@ -57,7 +57,7 @@ const NoticeData = styled.div`
   font-size: 13px;
 `;
 
-const MM00Presenter = ({ popularDatum }) => {
+const MM00Presenter = ({ popularDatum, newsDatum }) => {
   return (
     <Wrapper dr={`column`} width={`100%`} height={`100%`}>
       <ImageBox width={`100%`} height={`300px`}>
@@ -85,13 +85,31 @@ const MM00Presenter = ({ popularDatum }) => {
             )}
           </NoticeData>
         </NoticeWrapper>
+
+        <NoticeWrapper dr={`column`}>
+          <NoticeInfo> 뉴스 </NoticeInfo>
+          <NoticeData>
+            {newsDatum ? (
+              newsDatum.length === 0 ? (
+                <Wrapper>뉴스가 없습니다.</Wrapper>
+              ) : (
+                newsDatum.map((data, idx) => {
+                  return (
+                    <Fade bottom delay={idx * 60} key={idx}>
+                      <NoticeData>{data.title}</NoticeData>
+                    </Fade>
+                  );
+                })
+              )
+            ) : (
+              <Wrapper>조회중입니다.</Wrapper>
+            )}
+          </NoticeData>
+        </NoticeWrapper>
+
         <NoticeWrapper dr={`column`}>
           <NoticeInfo> 자유게시판 </NoticeInfo>
           <NoticeData> 자유자유 </NoticeData>
-        </NoticeWrapper>
-        <NoticeWrapper dr={`column`}>
-          <NoticeInfo> 뉴스 </NoticeInfo>
-          <NoticeData>와 빅뉴스</NoticeData>
         </NoticeWrapper>
       </NewWrapper>
     </Wrapper>

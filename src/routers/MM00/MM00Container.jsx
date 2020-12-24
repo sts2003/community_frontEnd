@@ -1,7 +1,8 @@
 import React from "react";
 import MM00Presenter from "./MM00Presenter";
 import { useQuery } from "react-apollo-hooks";
-import { GET_POPULAR_NOTICE } from "./MM00Queries";
+import { GET_POPULAR_BOARD } from "./MM00Queries";
+import { GET_ALL_NEWSES } from "./MM00Queries";
 
 const MM00Container = () => {
   ///////////////////// - VARIABLE - ////////////////////////
@@ -18,12 +19,19 @@ const MM00Container = () => {
     data: popularDatum,
     loading: popularLoading,
     refetch: popularRefetch,
-  } = useQuery(GET_POPULAR_NOTICE);
+  } = useQuery(GET_POPULAR_BOARD);
 
-  console.log(popularDatum && popularDatum.getPopularNotice);
+  const {
+    data: newsDatum,
+    loading: newsLoading,
+    refetch: newsRefetch,
+  } = useQuery(GET_ALL_NEWSES);
+
+  console.log(popularDatum && popularDatum.getPopularBoard);
   return (
     <MM00Presenter
-      popularDatum={popularDatum && popularDatum.getPopularNotice}
+      popularDatum={popularDatum && popularDatum.getPopularBoard}
+      newsDatum={newsDatum && newsDatum.getAllNewses}
     />
   );
 };
