@@ -47,7 +47,7 @@ const ActionSpan = styled.span`
 `;
 
 const HeaderTop = styled.div`
-  width: 100%;
+  width: 60%;
   height: 40px;
   margin-bottom: 30px;
 
@@ -58,7 +58,7 @@ const HeaderTop = styled.div`
 `;
 
 const HeaderBottom = styled.div`
-  width: 100%;
+  width: 50%;
   height: 40px;
 
   display: flex;
@@ -112,19 +112,20 @@ const Header = ({ history }) => {
   return (
     <HeaderWrapper>
       <HeaderTop>
-        <InnerWrapper>
+        <InnerWrapper width={`30%`}>
           <ActionSpan onClick={() => moveLinkHandler("/")} fontSize={`20px`}>
             LOGO
           </ActionSpan>
         </InnerWrapper>
-        <InnerWrapper>
+        <InnerWrapper width={`40%`}>
           <SearchInput
             width={`600px`}
             // onKeyDown={(e) => e.keyCode === 13 && changeSearchValueHandler()}
             // {...inputSearchValue}
+            placeholder={`검색어를 입력하세요...`}
           />
         </InnerWrapper>
-        <InnerWrapper width={`200px`}>
+        <InnerWrapper width={`30%`}>
           <ActionSpan
             onClick={() => moveLinkHandler("/signin")}
             fontSize={`15px`}
@@ -141,16 +142,26 @@ const Header = ({ history }) => {
       </HeaderTop>
       <HeaderBottom>
         <InnerWrapper>
-          <ActionSpan fontSize={`17px`}> 인기 게시판</ActionSpan>
-          <ActionSpan fontSize={`17px`}> 자유 게시판</ActionSpan>
+          <ActionSpan
+            fontSize={`17px`}
+            onClick={() => moveLinkHandler("/popular")}
+          >
+            인기 게시판
+          </ActionSpan>
+          <ActionSpan
+            fontSize={`17px`}
+            onClick={() => moveLinkHandler("/freeBoard")}
+          >
+            자유 게시판
+          </ActionSpan>
           <ActionSpan fontSize={`17px`}> 뉴스</ActionSpan>
           <ActionSpan fontSize={`17px`}> 익명게시판</ActionSpan>
+          <ActionSpan fontSize={`17px`}> 꿀팁게시판</ActionSpan>
+          <ActionSpan fontSize={`17px`}> 통합게시판 </ActionSpan>
           <ActionSpan fontSize={`17px`}> </ActionSpan>
           <ActionSpan fontSize={`17px`}> </ActionSpan>
           <ActionSpan fontSize={`17px`}> </ActionSpan>
-          <ActionSpan fontSize={`17px`}> </ActionSpan>
-          <ActionSpan fontSize={`17px`}> </ActionSpan>
-          <ActionSpan fontSize={`17px`}> 통합게시판</ActionSpan>
+          <ActionSpan fontSize={`17px`}> 공지사항</ActionSpan>
         </InnerWrapper>
       </HeaderBottom>
     </HeaderWrapper>

@@ -1,10 +1,13 @@
 import React from "react";
 import MM00Presenter from "./MM00Presenter";
 import { useQuery } from "react-apollo-hooks";
-import { GET_POPULAR_BOARD } from "./MM00Queries";
-import { GET_ALL_NEWSES } from "./MM00Queries";
+import {
+  GET_POPULAR_BOARD,
+  GET_ALL_NEWSES,
+  GET_ALL_FREES,
+} from "./MM00Queries";
 
-const MM00Container = () => {
+const MM00Container = ({ history }) => {
   ///////////////////// - VARIABLE - ////////////////////////
 
   ///////////////////// - USE STATE - ////////////////////////
@@ -12,6 +15,12 @@ const MM00Container = () => {
   ///////////////////// - USE REF - ////////////////////////
 
   ///////////////////// - USE CONTEXT - ////////////////////////
+
+  ///////////////////// - EVENT HANDLER - /////////////////////
+
+  const moveLinkHandler = (link) => {
+    history.push(link);
+  };
 
   ///////////////////// - USE QUERY - ////////////////////////
 
@@ -27,11 +36,18 @@ const MM00Container = () => {
     refetch: newsRefetch,
   } = useQuery(GET_ALL_NEWSES);
 
-  console.log(popularDatum && popularDatum.getPopularBoard);
+  const {
+    data: freeDatum,
+    loading: freeLoading,
+    refetch: freeRefetch,
+  } = useQuery(GET_ALL_FREES);
+
   return (
     <MM00Presenter
       popularDatum={popularDatum && popularDatum.getPopularBoard}
       newsDatum={newsDatum && newsDatum.getAllNewses}
+      freeDatum={freeDatum && freeDatum.getFreeBoard}
+      moveLinkHandler={moveLinkHandler}
     />
   );
 };

@@ -6,8 +6,7 @@ const FooterArea = styled.footer`
   height: 300px;
   color: ${(props) => props.theme.whiteColor};
 
-  position: absolute;
-
+  top: 0;
   bottom: 0;
 `;
 
