@@ -32,7 +32,7 @@ const ActionSpan = styled.span`
   padding: 5px;
   margin: 5px;
   color: ${(props) => props.theme.whiteColor};
-  font-size: ${(props) => props.fontSize || `22px`};
+  font-size: ${(props) => props.fontSize || `17px`};
   font-weight: 600;
   cursor: pointer;
   transition: 0.5s infinite ease-in-out;
@@ -89,6 +89,11 @@ const Header = ({ history }) => {
     history.push(link);
   };
 
+  const logout = (link) => {
+    history.push(`/${link}`);
+    sessionStorage.removeItem("login");
+  };
+
   // const changeFloorHandler = (floor) => {
   //   setCurrentFloor(floor);
   //   setDetailKey(null);
@@ -126,18 +131,36 @@ const Header = ({ history }) => {
           />
         </InnerWrapper>
         <InnerWrapper width={`30%`}>
-          <ActionSpan
-            onClick={() => moveLinkHandler("/signin")}
-            fontSize={`15px`}
-          >
-            로그인
-          </ActionSpan>
-          <ActionSpan
-            onClick={() => moveLinkHandler("/signup")}
-            fontSize={`15px`}
-          >
-            로그아웃
-          </ActionSpan>
+          {window.sessionStorage.getItem(`login`) ? (
+            <ActionSpan padding={`10px`} onClick={() => logout(``)}>
+              로그아웃
+            </ActionSpan>
+          ) : (
+            <ActionSpan
+              padding={`10px`}
+              onClick={() => moveLinkHandler(`/signin`)}
+            >
+              로그인
+            </ActionSpan>
+          )}
+
+          {window.sessionStorage.getItem(`login`) ? (
+            <ActionSpan
+              padding={`10px`}
+              margin={`0px 0px 0px 10px`}
+              onClick={() => moveLinkHandler(`/signup`)}
+            >
+              마이페이지
+            </ActionSpan>
+          ) : (
+            <ActionSpan
+              padding={`10px`}
+              margin={`0px 0px 0px 10px`}
+              onClick={() => moveLinkHandler(`/signup`)}
+            >
+              회원가입
+            </ActionSpan>
+          )}
         </InnerWrapper>
       </HeaderTop>
       <HeaderBottom>

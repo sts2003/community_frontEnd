@@ -5,8 +5,10 @@ import { Fade } from "react-reveal";
 
 const NewWrapper = styled.div`
   width: 100%;
+  height: ${(props) => props.height || `100%`};
+
   display: flex;
-  flex-direction: row;
+  flex-direction: ${(props) => props.dr || `row`};
   justify-content: center;
   align-items: center;
 `;
@@ -23,7 +25,7 @@ const NoticeWrapper = styled.div`
 
 const ThumbNailNews = styled.div`
   width: 100%;
-  height: 300px;
+  height: 500px;
 
   background-color: ${(props) => props.theme.grayColor};
 
@@ -57,8 +59,12 @@ const NoticeInfo = styled.div`
 `;
 
 const NoticeData = styled.div`
-  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
+  font-size: 13px;
   cursor: pointer;
 `;
 
@@ -70,11 +76,11 @@ const MM00Presenter = ({
 }) => {
   return (
     <Wrapper dr={`column`} width={`100%`} height={`100%`}>
-      <ImageBox width={`100%`} height={`300px`}>
-        <ThumbNailNews />
+      <ImageBox width={`100%`} height={`500px`}>
+        <ThumbNailNews></ThumbNailNews>
       </ImageBox>
 
-      <NewWrapper>
+      <NewWrapper height={`600px`}>
         <NoticeWrapper dr={`column`}>
           <NoticeInfo onClick={() => moveLinkHandler("/popular")}>
             인기게시판
