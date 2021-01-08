@@ -148,7 +148,7 @@ const Header = ({ history }) => {
             <ActionSpan
               padding={`10px`}
               margin={`0px 0px 0px 10px`}
-              onClick={() => moveLinkHandler(`/signup`)}
+              onClick={() => moveLinkHandler(`/mypage`)}
             >
               마이페이지
             </ActionSpan>

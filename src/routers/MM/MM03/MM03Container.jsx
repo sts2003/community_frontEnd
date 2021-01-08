@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import MM03Presenter from "./MM03Presenter";
 import useInput from "../../../hooks/useInput";
-import { TRY_LOGIN, CHECK_SECRET_CODE } from "./MM03Queries";
+import { TRY_LOGIN, CHECK_SECRET_CODE, GET_USER } from "./MM03Queries";
 import { useMutation } from "react-apollo-hooks";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const MM03Container = ({ history }) => {
   ///////////////////// - VARIABLE - ////////////////////////
@@ -21,9 +23,19 @@ const MM03Container = ({ history }) => {
   ///////////////////// - USE MUTATION - ////////////////////////
   const [tryLoginMutation] = useMutation(TRY_LOGIN);
   const [checkSecretCodeMutation] = useMutation(CHECK_SECRET_CODE);
+  const [getUserMutation] = useMutation(GET_USER);
 
   ///////////////////// - USE EFFECT - ////////////////////////
+  const userData = async () => {
+    const { data } = await getUserMutation({
+      variables: {
+        email: inputEmail.value,
+        secretCode: assignment.value,
+      },
+    });
 
+    return { data };
+  };
   const loginClickHandler = async () => {
     const { data } = await tryLoginMutation({
       variables: {
@@ -32,6 +44,22 @@ const MM03Container = ({ history }) => {
     });
 
     if (data.tryLogin) {
+      confirmAlert({
+        title: "LOGIN",
+        message: "로그인 하시겠습니까?",
+        buttons: [
+          {
+            label: "취소",
+            onClick: () => {
+              return false;
+            },
+          },
+          {
+            label: "확인",
+            onClick: () => assignmentCheckHandler,
+          },
+        ],
+      });
       setTab(1);
     } else {
       alert("가입된 이메일이 아닙니다.");
@@ -48,16 +76,15 @@ const MM03Container = ({ history }) => {
 
     if (data.checkSecretCode) {
       alert("로그인 성공 !!");
+      window.sessionStorage.setItem(
+        "login",
+        JSON.stringify((await userData()).data)
+      );
       history.push("/");
     } else {
       alert("인증코드가 잘못되었습니다.");
     }
   };
-
-  // 사용자 데이터를 JWT TOKEN으로 생성하여 가져온다.
-  // 크롬에서 PASSPORT TOKEN을 통해 session에 토큰을 저장하고,
-  // 모든 화면에서는 login 상태를 알기 위한 redux || contextAPI를
-  // 세팅하여 로그인 상태를 유지하기 위한 처리를 한다.
 
   return (
     <MM03Presenter

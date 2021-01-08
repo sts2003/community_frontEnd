@@ -14,11 +14,17 @@ import {
   PagenationWrapper,
   PagenationBtn,
   Pagenation,
+  CommonButton,
 } from "../../../components/CommonComponents";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
 import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 
+const Button = styled.button``;
 const SearchInput = styled(TextInput)`
   position: relative;
   border: 1px solid #dcdcdc;
@@ -59,12 +65,40 @@ const SearchWrapper2 = styled(Wrapper)`
   }
 `;
 
+const FileInput = styled.input`
+  display: none;
+`;
+
+const FileLabel = styled.label`
+  width: 120px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  cursor: pointer;
+  background-color: ${(props) => props.theme.checkColor};
+  color: #fff;
+  box-shadow: ${(props) => props.theme.boxShadow};
+  margin: 5px;
+  border-radius: ${(props) => props.theme.radius};
+`;
+
+const Image = styled.img`
+  width: 400px;
+  height: 400px;
+  border: 1px solid #777;
+  margin: 10px;
+  object-fit: cover;
+`;
+
 const MM02Presenter = ({
   freeDatum,
   pages,
   currentPage,
   limit,
   setCurrentPage,
+  isDialogOpen,
+  _isDialogOpenToggle,
+  _valueChangeHandler,
   prevAndNextPageChangePopularHandler,
   //   //   changeSearchValueHandler,
   //   //   changeFloorHandler,
@@ -72,7 +106,9 @@ const MM02Presenter = ({
   changePageHandler,
   moveLinkHandler,
   totalCnt,
+  imagePath,
   //   link,
+  fileChangeHandler,
 }) => {
   return (
     <WholeWrapper margin={`150px 0 0 0`} height={`100%`}>
@@ -187,6 +223,64 @@ const MM02Presenter = ({
 
         {/* pageNation AreaEnd */}
       </RsWrapper>
+
+      <Wrapper margin={`30px 0px`} ju={`flex-end`} dr={`row`}>
+        <CommonButton
+          width={`80px`}
+          margin={`0px 10px 0px 0px`}
+          onClick={() => _isDialogOpenToggle()}
+        >
+          글 작성
+        </CommonButton>
+      </Wrapper>
+
+      <Dialog
+        onClose={_isDialogOpenToggle}
+        aria-labelledby="customized-dialog-title"
+        open={isDialogOpen}
+        fullWidth={true}
+      >
+        <DialogTitle
+          id="customized-dialog-title"
+          onClose={_isDialogOpenToggle}
+          // class="dialog_title"
+        >
+          게시글 추가
+        </DialogTitle>
+        <DialogContent>
+          <Wrapper dr={`row`}>
+            제목
+            <TextInput
+              name="title"
+              // value={valueTitle}
+              onChange={_valueChangeHandler}
+            ></TextInput>
+          </Wrapper>
+          <Wrapper dr={`row`}>
+            내용
+            <TextInput
+              name="desc"
+              // value={valueDesc}
+              onChange={_valueChangeHandler}
+            ></TextInput>
+          </Wrapper>
+          <Wrapper dr={`row`}>
+            <Image src={imagePath}></Image>
+            <FileInput type="file" id="file-js" onChange={fileChangeHandler} />
+            <FileLabel htmlFor="file-js">파일 선택</FileLabel>
+          </Wrapper>
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" onClick={() => addNotice()}>
+            보내기
+          </Button>
+          <Button color="secondary" onClick={() => _isDialogOpenToggle()}>
+            취소
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Dialog Area */}
     </WholeWrapper>
   );
 };
