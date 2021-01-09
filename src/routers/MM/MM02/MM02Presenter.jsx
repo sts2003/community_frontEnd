@@ -107,6 +107,8 @@ const MM02Presenter = ({
   moveLinkHandler,
   totalCnt,
   imagePath,
+  addFreeBoard,
+  createFreeHandler,
   //   link,
   fileChangeHandler,
 }) => {
@@ -228,7 +230,7 @@ const MM02Presenter = ({
         <CommonButton
           width={`80px`}
           margin={`0px 10px 0px 0px`}
-          onClick={() => _isDialogOpenToggle()}
+          onClick={() => createFreeHandler()}
         >
           글 작성
         </CommonButton>
@@ -271,8 +273,8 @@ const MM02Presenter = ({
           </Wrapper>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={() => addNotice()}>
-            보내기
+          <Button color="primary" onClick={() => addFreeBoard()}>
+            글쓰기
           </Button>
           <Button color="secondary" onClick={() => _isDialogOpenToggle()}>
             취소

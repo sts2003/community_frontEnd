@@ -3,10 +3,13 @@ import { ThemeProvider } from "styled-components";
 import Theme from "../Styles/Theme";
 import GlobalStyles from "../Styles/GlobalStyles";
 import AppRouter from "./AppRouter";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <ThemeProvider theme={Theme}>
+      <ToastContainer position={toast.POSITION.BOTTOM_CENTER} />
       <GlobalStyles />
       <AppRouter />
     </ThemeProvider>

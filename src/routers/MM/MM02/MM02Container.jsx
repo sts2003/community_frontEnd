@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from "react-apollo-hooks";
+import { useQuery, useMutation } from "react-apollo-hooks";
 import {
   GET_FREE_BOARD,
+  CREATE_FREE,
   GET_FREE_TOTALPAGE,
   GET_FREE_TOTAL_PAGE,
   GET_FREE_TOTALPAGE_ONLY_CNT,
 } from "./MM02Queries";
 import MM02Presenter from "./MM02Presenter";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import useInput from "../../../hooks/useInput";
+import storageRef from "../../../firebase";
 
 const MM02Container = ({ history }) => {
   ////////////// - USE STATE- ///////////////
@@ -19,15 +22,15 @@ const MM02Container = ({ history }) => {
   const [limit, setLimit] = useState(10);
   const [imagePath, setImagePath] = useState(``);
   //   const inputSearch = useInput("");
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(``);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [email, setEmail] = useState(window.sessionStorage.getItem("login"));
   const [value, setValue] = useState({
     title: "",
     desc: "",
   });
 
   ////////////// - USE QUERY- ///////////////
-
   const {
     data: freeDatum,
     loading: freeLoading,
@@ -91,7 +94,45 @@ const MM02Container = ({ history }) => {
     setIsDialogOpen(!isDialogOpen);
   };
 
+  const createFreeHandler = () => {
+    const key = sessionStorage.getItem("login");
+
+    if (key) {
+      _isDialogOpenToggle();
+    } else {
+      toast.info("로그인 후 이용하실 수 있습니다.");
+      history.push("/signin");
+    }
+  };
   /////////////// - USE MUTATION- //////////////
+
+  const [createFree] = useMutation(CREATE_FREE, {
+    variables: {
+      title: value.title,
+      description: value.desc,
+    },
+  });
+
+  const addFreeBoard = async () => {
+    if (value.title === "") {
+      toast.error("FREE TYPE IS MUST!");
+      return;
+    }
+    if (value.desc === "") {
+      toast.error("FREE TYPE IS MUST!");
+      return;
+    }
+
+    const { data } = await createFree();
+    if (data.createFree) {
+      toast.info("게시글이 추가되었습니다");
+      freeDatumRefetch();
+      setValue("");
+      _isDialogOpenToggle();
+    } else {
+      toast.error("다시 시도해주세요");
+    }
+  };
 
   /////////////// - EVENT HANDLER- /////////////
 
@@ -143,14 +184,13 @@ const MM02Container = ({ history }) => {
 
     console.log(originFile);
     console.log(originFileName);
-    // event는 변하기 때문에 어딘가에 저장을 해줘야한다. -> 밑에서 사용해야하기 때문에 이벤트가 바뀌기 전에 따로 저장해준다
+
     const D = new Date();
 
     const year = D.getFullYear() + "";
     const month = D.getMonth() + 1 + "";
     const date = D.getDate() + "";
-    //겟 데이트는 현재 날자
-    // 겟 데이는 현재 요일
+
     const hour = D.getHours() + "";
     const min = D.getMinutes() + "";
     const sec = D.getSeconds() + "";
@@ -158,7 +198,6 @@ const MM02Container = ({ history }) => {
     const suffix = year + month + date + hour + min + sec;
 
     const uploadFileName = originFileName + suffix;
-    // 이것이 들어가는 데이터 이름이다. 중복이 되지 않기 때문(suffix를 달아줬기 때문에)
 
     try {
       const storage = storageRef.child(
@@ -169,7 +208,6 @@ const MM02Container = ({ history }) => {
 
       setImagePath(url);
     } catch (e) {}
-    // catch를 잡을 때 콘솔로그를 찍으면 사용자에게 에러가 보이기 때문에 사용 X
   };
 
   ////////////// - USE EFFECT- //////////////
@@ -187,6 +225,7 @@ const MM02Container = ({ history }) => {
       // }
       fileChangeHandler={fileChangeHandler}
       _isDialogOpenToggle={_isDialogOpenToggle}
+      addFreeBoard={addFreeBoard}
       isDialogOpen={isDialogOpen}
       _valueChangeHandler={_valueChangeHandler}
       prevAndNextPageChangeFreeHandler={prevAndNextPageChangeFreeHandler}
@@ -196,6 +235,7 @@ const MM02Container = ({ history }) => {
       //   changeFloorHandler={changeFloorHandler}
       //   changeSearchValueHandler={changeSearchValueHandler}
       _valueChangeHandler={_valueChangeHandler}
+      createFreeHandler={createFreeHandler}
       valueTitle={value.title}
       valueDesc={value.desc}
       imagePath={imagePath}

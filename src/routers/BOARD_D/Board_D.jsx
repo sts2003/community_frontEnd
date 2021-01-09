@@ -9,12 +9,14 @@ import {
 import styled from "styled-components";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   WholeWrapper,
   RsWrapper,
   CommonButton,
   Wrapper,
   TextInput,
+  ImageBox,
 } from "../../components/CommonComponents";
 import useTitle from "@4leaf.ysh/use-title";
 import { confirmAlert } from "react-confirm-alert";
@@ -72,6 +74,7 @@ export default ({ match, history, width }) => {
   ////////////// - USE STATE- ///////////////
   const [currentData, setCurrentData] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [imagePath, setImagePath] = useState(``);
   const [value, setValue] = useState({
     title: "",
     desc: "",
@@ -117,7 +120,7 @@ export default ({ match, history, width }) => {
   const updateFree = async () => {
     const { data } = await updateFreeBoard({
       variables: {
-        _id: freeData && freeData.getFreeDetail._id,
+        id: freeData && freeData.getFreeDetail._id,
         title: value.title,
         description: value.desc,
       },
@@ -168,7 +171,7 @@ export default ({ match, history, width }) => {
       return null;
     }
 
-    history.push(FreeNextData.getFreeBoardNextId._id);
+    history.push(FreeNextData.getFreeBoardNextId.id);
   };
 
   const boardDeleteHandler = (_id) => {
@@ -193,7 +196,7 @@ export default ({ match, history, width }) => {
   const freeDeleteHandlerAfter = async (_id) => {
     const { data } = await deleteFreeBoard({
       variables: {
-        _id: currentData.id,
+        id: currentData._id,
       },
     });
 
@@ -259,6 +262,7 @@ export default ({ match, history, width }) => {
             id={"notice_description-js"}
             className={"ql-editor"}
           ></Wrapper>
+          <ImageBox src={imagePath} />
         </Board_D_Desc>
 
         <Wrapper margin={`30px 0px`} ju={`flex-end`} dr={`row`}>

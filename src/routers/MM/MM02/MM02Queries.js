@@ -38,6 +38,18 @@ export const GET_FREE_DETAIL = gql`
 //   }
 // `;
 
+// export const CREATE_FREE = gql`
+//   mutation createFree($email: String!, $title: String!, $description: String!) {
+//     createFree(email: $email, title: $title, description: $description)
+//   }
+// `;
+
+export const CREATE_FREE = gql`
+  mutation createFree($title: String!, $description: String!) {
+    createFree(title: $title, description: $description)
+  }
+`;
+
 export const DELETE_FREE = gql`
   mutation deleteFree($id: String!) {
     deleteFree(id: $id)
