@@ -37,58 +37,58 @@ const MM02Container = ({ history }) => {
     refetch: freeDatumRefetch,
   } = useQuery(GET_FREE_BOARD);
 
-  // const {
-  //   data: totalPageData,
-  //   loading: totalPageLoading,
-  //   refetch: totalPageRefetch,
-  // } = useQuery(GET_FREE_TOTALPAGE, {
-  //   variables: {
-  //     searchValue,
-  //     limit,
-  //   },
-  // });
+  const {
+    data: totalPageData,
+    loading: totalPageLoading,
+    refetch: totalPageRefetch,
+  } = useQuery(GET_FREE_TOTALPAGE, {
+    variables: {
+      searchValue,
+      limit,
+    },
+  });
 
-  // const { data: freePageDatum, refetch: freePageRefetch } = useQuery(
-  //   GET_FREE_TOTAL_PAGE,
-  //   {
-  //     variables: {
-  //       searchValue,
-  //       limit,
-  //     },
-  //   }
-  // );
+  const { data: freePageDatum, refetch: freePageRefetch } = useQuery(
+    GET_FREE_TOTAL_PAGE,
+    {
+      variables: {
+        searchValue,
+        limit,
+      },
+    }
+  );
 
-  // const {
-  //   data: totalPageOnlyCntData,
-  //   loading: totalPageOnlyCntLoading,
-  //   refetch: totalPageOnlyCntRefetch,
-  // } = useQuery(GET_FREE_TOTALPAGE_ONLY_CNT, {
-  //   variables: {
-  //     searchValue,
-  //     limit,
-  //   },
-  // });
+  const {
+    data: totalPageOnlyCntData,
+    loading: totalPageOnlyCntLoading,
+    refetch: totalPageOnlyCntRefetch,
+  } = useQuery(GET_FREE_TOTALPAGE_ONLY_CNT, {
+    variables: {
+      searchValue,
+      limit,
+    },
+  });
 
   ////////////// - USE EFFECT- //////////////
 
-  // useEffect(() => {
-  //   freeDatumRefetch();
-  //   freePageRefetch();
-  //   if (freePageDatum && !pages) {
-  //     const temp = [];
+  useEffect(() => {
+    freeDatumRefetch();
+    freePageRefetch();
+    if (freePageDatum && !pages) {
+      const temp = [];
 
-  //     for (let i = 0; i < freePageDatum.getfreeTotalPage; i++) {
-  //       temp.push(i);
-  //     }
-  //     setPages(temp);
-  //   }
-  // }, [freePageDatum]);
+      for (let i = 0; i < freePageDatum.getFreeTotalPage; i++) {
+        temp.push(i);
+      }
+      setPages(temp);
+    }
+  }, [freePageDatum]);
 
-  // useEffect(() => {
-  //   freeDatumRefetch();
-  //   totalPageRefetch();
-  //   totalPageOnlyCntRefetch();
-  // }, []);
+  useEffect(() => {
+    freeDatumRefetch();
+    totalPageRefetch();
+    totalPageOnlyCntRefetch();
+  }, []);
 
   const _isDialogOpenToggle = () => {
     setIsDialogOpen(!isDialogOpen);
@@ -110,6 +110,7 @@ const MM02Container = ({ history }) => {
     variables: {
       title: value.title,
       description: value.desc,
+      imagePath,
     },
   });
 
@@ -161,7 +162,7 @@ const MM02Container = ({ history }) => {
   };
 
   const moveLinkHandler = (idx) => {
-    history.push(`/detail/${idx}`);
+    history.push(`/free-detail/${idx}`);
   };
 
   const prevAndNextPageChangeFreeHandler = (page) => {
@@ -170,7 +171,7 @@ const MM02Container = ({ history }) => {
       return;
     }
 
-    if (page > freePageDatum.getfreeTotalPage - 1) {
+    if (page > freePageDatum.getFreeTotalPage - 1) {
       toast.error("마지막 페이지 입니다.");
       return;
     }
@@ -219,10 +220,10 @@ const MM02Container = ({ history }) => {
       pages={pages}
       limit={limit}
       setCurrentPage={setCurrentPage}
-      // totalPage={totalPageData && totalPageData.getFreeTotalPage}
-      // totalCnt={
-      //   totalPageOnlyCntData && totalPageOnlyCntData.getFreeTotalPageOnlyCnt
-      // }
+      totalPage={totalPageData && totalPageData.getFreeTotalPage}
+      totalCnt={
+        totalPageOnlyCntData && totalPageOnlyCntData.getFreeTotalPageOnlyCnt
+      }
       fileChangeHandler={fileChangeHandler}
       _isDialogOpenToggle={_isDialogOpenToggle}
       addFreeBoard={addFreeBoard}

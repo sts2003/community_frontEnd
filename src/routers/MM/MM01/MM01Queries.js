@@ -1,19 +1,36 @@
 import { gql } from "apollo-boost";
 
 export const GET_POPULAR_BOARD = gql`
-  query getPopularBoard(
-    $searchValue: String!
-    $limit: Int!
-    $currentPage: Int!
-  ) {
-    getPopularBoard(
-      searchValue: $searchValue
-      limit: $limit
-      currentPage: $currentPage
-    ) {
+  query getPopularBoard {
+    getPopularBoard {
       _id
       title
       description
+    }
+  }
+`;
+
+export const GET_POPULAR_DETAIL = gql`
+  query getPopularDetail($id: String!) {
+    getPopularDetail(id: $id) {
+      _id
+      title
+      description
+    }
+  }
+`;
+export const GET_POPULAR_NEXT_ID = gql`
+  query getPopularNextId($id: String!) {
+    getPopularNextId(id: $id) {
+      _id
+    }
+  }
+`;
+
+export const GET_POPULAR_BEFORE_ID = gql`
+  query getPopularBeforeId($id: String!) {
+    getPopularBeforeId(id: $id) {
+      _id
     }
   }
 `;

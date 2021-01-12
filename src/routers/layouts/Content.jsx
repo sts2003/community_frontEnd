@@ -7,7 +7,8 @@ import MM03 from "../../routers/MM/MM03";
 import MM04 from "../../routers/MM/MM04";
 import MM05 from "../../routers/MM/MM05";
 import MM06 from "../../routers/MM/MM06";
-import Board_D from "../BOARD_D/Board_D";
+import Free_D from "../BOARD_D/Free_D";
+import Popular_D from "../BOARD_D/Popular_D";
 import SimpleSlider from "../../components/Slide";
 import styled from "styled-components";
 
@@ -22,7 +23,8 @@ const Content = () => {
       <Route exact path="/" component={MM00} />
       <Route exact path="/popular" component={MM01} />
       <Route exact path="/freeBoard" component={MM02} />
-      <Route exact path="/detail/:key" component={Board_D} />
+      <Route exact path="/free-detail/:key" component={Free_D} />
+      <Route exact path="/popular-detail/:key" component={Popular_D} />
       <Route exact path="/signin" component={MM03} />
       <Route exact path="/signup" component={MM04} />
       <Route exact path="/mypage" component={MM05} />

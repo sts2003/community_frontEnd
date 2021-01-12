@@ -128,7 +128,7 @@ const MM01Presenter = ({
           ) : (
             popularDatum.map((data, idx) => {
               return (
-                <TableBody key={idx} onClick={() => moveLinkHandler(data.id)}>
+                <TableBody key={idx} onClick={() => moveLinkHandler(data._id)}>
                   {/* {data.description} */}
                   <TableBodyLIST width={`100px`}>
                     {totalCnt - (currentPage * limit + idx) + ""}

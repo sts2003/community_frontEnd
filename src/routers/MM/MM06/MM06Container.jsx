@@ -25,7 +25,7 @@ const MM06Container = () => {
     refetch: newsRefetch,
   } = useQuery(GET_ALL_NEWSES);
 
-  return <MM06Presenter />;
+  return <MM06Presenter newsDatum={newsDatum} />;
 };
 
 export default MM06Container;

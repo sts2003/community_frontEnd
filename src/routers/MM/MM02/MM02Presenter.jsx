@@ -99,7 +99,7 @@ const MM02Presenter = ({
   isDialogOpen,
   _isDialogOpenToggle,
   _valueChangeHandler,
-  prevAndNextPageChangePopularHandler,
+  prevAndNextPageChangeFreeHandler,
   //   //   changeSearchValueHandler,
   //   //   changeFloorHandler,
   //   //   inputSearchValue,
@@ -194,8 +194,7 @@ const MM02Presenter = ({
             <PagenationWrapper width={`auto`}>
               <PagenationBtn
                 onClick={() =>
-                  freeDatum &&
-                  prevAndNextPageChangePopularHandler(currentPage - 1)
+                  freeDatum && prevAndNextPageChangeFreeHandler(currentPage - 1)
                 }
               >
                 <IoIosArrowBack />
@@ -213,8 +212,7 @@ const MM02Presenter = ({
               })}
               <PagenationBtn
                 onClick={() =>
-                  freeDatum &&
-                  prevAndNextPageChangePopularHandler(currentPage + 1)
+                  freeDatum && prevAndNextPageChangeFreeHandler(currentPage + 1)
                 }
               >
                 <IoIosArrowForward />

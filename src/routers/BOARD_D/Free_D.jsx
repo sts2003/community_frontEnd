@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   GET_FREE_DETAIL,
-  //   GET_NOTICEBOARD_BEFORE_ID,
-  //   GET_NOTICEBOARD_NEXT_ID,
+  GET_FREE_BEFORE_ID,
+  GET_FREE_NEXT_ID,
   DELETE_FREE,
   UPDATE_FREE,
 } from "../MM/MM02/MM02Queries";
@@ -16,7 +16,6 @@ import {
   CommonButton,
   Wrapper,
   TextInput,
-  ImageBox,
 } from "../../components/CommonComponents";
 import useTitle from "@4leaf.ysh/use-title";
 import { confirmAlert } from "react-confirm-alert";
@@ -47,6 +46,13 @@ const Board_D = styled.ul`
     flex-direction: column;
     height: auto;
   }
+`;
+const Image = styled.img`
+  width: 400px;
+  height: 400px;
+  border: 1px solid #777;
+  margin: 10px;
+  object-fit: cover;
 `;
 
 const Board_D_List = styled.li`
@@ -91,25 +97,25 @@ export default ({ match, history, width }) => {
     },
   });
 
-  //   const {
-  //     data: freeNextData,
-  //     loading: freeNextLoading,
-  //     refetch: freeNextRefetch,
-  //   } = useQuery(GET_FREE_NEXT_ID, {
-  //     variables: {
-  //       id: match.params.key,
-  //     },
-  //   });
+  const {
+    data: freeNextData,
+    loading: freeNextLoading,
+    refetch: freeNextRefetch,
+  } = useQuery(GET_FREE_NEXT_ID, {
+    variables: {
+      id: match.params.key,
+    },
+  });
 
-  //   const {
-  //     data: freeBeforeData,
-  //     loading: freeBeforeLoading,
-  //     refetch: freeBeforeRefetch,
-  //   } = useQuery(GET_FREE_BEFORE_ID, {
-  //     variables: {
-  //       id: match.params.key,
-  //     },
-  //   });
+  const {
+    data: freeBeforeData,
+    loading: freeBeforeLoading,
+    refetch: freeBeforeRefetch,
+  } = useQuery(GET_FREE_BEFORE_ID, {
+    variables: {
+      id: match.params.key,
+    },
+  });
 
   ///////////// - USE MUTATION - /////////////
   const [updateFreeBoard] = useMutation(UPDATE_FREE);
@@ -161,7 +167,7 @@ export default ({ match, history, width }) => {
 
       return null;
     }
-    history.push(freeBeforeData.getFreeBeforeId.id);
+    history.push(freeBeforeData.getFreeBeforeId._id);
   };
 
   const _moveNextBoard = () => {
@@ -171,13 +177,13 @@ export default ({ match, history, width }) => {
       return null;
     }
 
-    history.push(FreeNextData.getFreeBoardNextId.id);
+    history.push(freeNextData.getFreeNextId._id);
   };
 
   const boardDeleteHandler = (_id) => {
     confirmAlert({
       title: "DELETE FREE",
-      message: "선택하신 공지사항을 삭제하시겠습니까?",
+      message: "삭제하시겠습니까?",
       buttons: [
         {
           label: "취소",
@@ -202,7 +208,7 @@ export default ({ match, history, width }) => {
 
     if (data.deleteFree) {
       toast.info("DELETE FREE!");
-      history.push("/");
+      history.push("/freeBoard");
     } else {
       toast.error("잠시 후 다시 시도해주세요.");
     }
@@ -213,6 +219,7 @@ export default ({ match, history, width }) => {
     if (freeData && freeData.getFreeDetail) {
       let tempData = freeData.getFreeDetail;
 
+      console.log(tempData);
       const desc = document.getElementById("notice_description-js");
 
       if (desc !== null) {
@@ -224,8 +231,8 @@ export default ({ match, history, width }) => {
 
   useEffect(() => {
     freeRefetch();
-    // freeNextRefetch();
-    // freeBeforeRefetch();
+    freeNextRefetch();
+    freeBeforeRefetch();
   }, []);
 
   useTitle(`Free Board`);
@@ -262,7 +269,7 @@ export default ({ match, history, width }) => {
             id={"notice_description-js"}
             className={"ql-editor"}
           ></Wrapper>
-          <ImageBox src={imagePath} />
+          <Image src={imagePath}></Image>
         </Board_D_Desc>
 
         <Wrapper margin={`30px 0px`} ju={`flex-end`} dr={`row`}>
@@ -270,6 +277,7 @@ export default ({ match, history, width }) => {
             width={`80px`}
             margin={`0px 10px 0px 0px`}
             bgColor={`#55E6C1`}
+            fontColor={`#55E6C1`}
             onClick={() => _isDialogOpenToggle()}
           >
             수정
@@ -279,6 +287,8 @@ export default ({ match, history, width }) => {
             width={`80px`}
             margin={`0px 10px 0px 0px`}
             onClick={() => boardDeleteHandler()}
+            bgColor={`#FC427B`}
+            fontColor={`#FC427B`}
           >
             삭제
           </CommonButton>
@@ -297,6 +307,8 @@ export default ({ match, history, width }) => {
             width={`80px`}
             margin={`0px 10px 0px 0px`}
             onClick={() => _moveBeforeBoard()}
+            bgColor={`#1e272e`}
+            fontColor={`#1e272e`}
           >
             이전
           </CommonButton>
@@ -305,6 +317,8 @@ export default ({ match, history, width }) => {
             width={`80px`}
             margin={`0px 10px 0px 0px`}
             onClick={() => _moveNextBoard()}
+            bgColor={`#777`}
+            fontColor={`#777`}
           >
             다음
           </CommonButton>

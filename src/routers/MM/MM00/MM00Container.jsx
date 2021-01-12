@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MM00Presenter from "./MM00Presenter";
 import { useQuery } from "react-apollo-hooks";
 import {
@@ -41,6 +41,11 @@ const MM00Container = ({ history }) => {
     loading: freeLoading,
     refetch: freeRefetch,
   } = useQuery(GET_ALL_FREES);
+  ///////////////////// - USE EFFECT - ///////////////////////
+
+  useEffect(() => {
+    popularRefetch();
+  }, [GET_POPULAR_BOARD]);
 
   return (
     <MM00Presenter

@@ -1,16 +1,8 @@
 import { gql } from "apollo-boost";
 
 export const GET_POPULAR_BOARD = gql`
-  query getPopularBoard(
-    $searchValue: String!
-    $limit: Int!
-    $currentPage: Int!
-  ) {
-    getPopularBoard(
-      searchValue: $searchValue
-      limit: $limit
-      currentPage: $currentPage
-    ) {
+  query getPopularBoard {
+    getPopularBoard {
       _id
       title
       description
