@@ -9,18 +9,12 @@ import AdminContent from "../routers/admin/adminLayout/AdminContent";
 const AppRouter = () => {
   return (
     <Router>
-      {Route.path === "/" ? (
-        <Router>
-          <Route path="/admin" component={AdminHeader} />
-          <Route path="/admin" component={AdminContent} />
-        </Router>
-      ) : (
-        <Router>
-          <Route path="/" component={Header} />
-          <Route path="/" component={Content} />
-          <Route path="/" component={Footer} />
-        </Router>
-      )}
+      <Route path="/admin" component={AdminHeader} />
+      <Route path="/admin" component={AdminContent} />
+
+      <Route path="/" component={Header} />
+      <Route path="/" component={Content} />
+      <Route path="/" component={Footer} />
     </Router>
   );
 };

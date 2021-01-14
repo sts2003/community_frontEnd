@@ -92,6 +92,7 @@ export const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-attachment: ${(props) => props.attachment || `fixed`};
   background-position: center;
+  margin-top: ${(props) => props.mgTop || `0px`};
 
   transition: 0.5s;
   cursor: ${(props) => props.cursor};

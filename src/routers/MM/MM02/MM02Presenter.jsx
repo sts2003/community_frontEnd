@@ -25,6 +25,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 
 const Button = styled.button``;
+
 const SearchInput = styled(TextInput)`
   position: relative;
   border: 1px solid #dcdcdc;
@@ -229,6 +230,7 @@ const MM02Presenter = ({
           width={`80px`}
           margin={`0px 10px 0px 0px`}
           onClick={() => createFreeHandler()}
+          bgColor={`#55E6C1`}
         >
           글 작성
         </CommonButton>

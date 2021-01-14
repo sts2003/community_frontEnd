@@ -177,7 +177,12 @@ const Header = ({ history }) => {
           >
             자유 게시판
           </ActionSpan>
-          <ActionSpan fontSize={`17px`}> 뉴스</ActionSpan>
+          <ActionSpan
+            fontSize={`17px`}
+            onClick={() => moveLinkHandler("/newsBoard")}
+          >
+            뉴스
+          </ActionSpan>
           <ActionSpan fontSize={`17px`}> 익명게시판</ActionSpan>
           <ActionSpan fontSize={`17px`}> 꿀팁게시판</ActionSpan>
           <ActionSpan fontSize={`17px`}> 통합게시판 </ActionSpan>

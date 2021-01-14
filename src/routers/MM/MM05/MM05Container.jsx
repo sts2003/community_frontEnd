@@ -1,51 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-apollo-hooks";
+import React, { useState } from "react";
+import { useMutation } from "react-apollo-hooks";
 import MM05Presenter from "./MM05Presenter";
 import { GET_USER_DETAIL } from "./MM05Queries";
+import useInput from "../../../hooks/useInput";
 
 const MM05Container = ({ match }) => {
   ///////////////////// - VARIABLE - ////////////////////////
 
   ///////////////////// - USE STATE - ////////////////////////
   // const [currentData, setCurrentData] = useState(null);
-
+  const userDatum = useState(window.sessionStorage.getItem("login"));
   ///////////////////// - USE REF - ////////////////////////
 
   ///////////////////// - USE CONTEXT - ////////////////////////
 
   ///////////////////// - USE QUERY - ////////////////////////
-  const {
-    data: userDatum,
-    loading: userLoading,
-    refetch: userRefetch,
-  } = useQuery(GET_USER_DETAIL, {
-    variables: {
-      id: match.params.key,
-    },
-  });
 
   //////////////////// - USE MUTATION - ///////////////////////
+  const [userInputDatum] = useMutation(GET_USER_DETAIL);
 
   ///////////////////// - USE EFFECT - ////////////////////////
 
-  useEffect(() => {
-    if (userDatum && userDatum.getUserDetail) {
-      let tempData = userDatum.getUserDetail;
+  const _valueChangeHandler = (event) => {
+    const nextState = { ...value };
 
-      const desc = document.getElementById("user_description-js");
+    nextState[event.target.name] = event.target.value;
 
-      if (desc !== null) {
-        desc.innerHTML = tempData.description;
-        setCurrentData(tempData);
-      }
-    }
-  }, [userDatum]);
+    setValue(nextState);
+  };
 
-  useEffect(() => {
-    userRefetch();
-  });
+  const userData = async () => {
+    const { data } = await userInputDatum({
+      variables: {
+        name: userDatum.value,
+      },
+    });
+
+    return { data };
+  };
 
   //////////////////// - USE HANDLER - /////////////////////////
-  return <MM05Presenter userDatum={userDatum && userDatum.getUserDetail} />;
+  return (
+    <MM05Presenter
+      userDatum={userDatum && userDatum.getUserDetail}
+      _valueChangeHandler={_valueChangeHandler}
+    />
+  );
 };
 export default MM05Container;

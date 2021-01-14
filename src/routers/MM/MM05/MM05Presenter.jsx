@@ -45,22 +45,26 @@ const MM05Presenter = ({ userDatum }) => {
       <Title> 마이 페이지</Title>
       <InputWrapper>
         이름 :
-        <InfoInput type="text" value={userDatum} />
+        <InfoInput type="text" value={JSON.parse("login").name} />
       </InputWrapper>
       <InputWrapper>
-        닉네임 : <InfoInput type="text" value={userDatum} />
+        닉네임 :
+        <InfoInput type="text" />
       </InputWrapper>
       <InputWrapper>
-        전화번호 : <InfoInput type="text" value={userDatum} />
+        전화번호 :
+        <InfoInput type="text" />
       </InputWrapper>
       <InputWrapper>
-        주소 : <InfoInput type="text" value={userDatum} />
+        주소 :
+        <InfoInput type="text" />
       </InputWrapper>
       <InputWrapper>
-        상세주소 : <InfoInput type="text" value={userDatum} />
+        상세주소 :
+        <InfoInput type="text" />
       </InputWrapper>
 
-      <CommonButton>수정</CommonButton>
+      <CommonButton color={`#777`}>수정</CommonButton>
     </WholeWrapper>
   );
 };

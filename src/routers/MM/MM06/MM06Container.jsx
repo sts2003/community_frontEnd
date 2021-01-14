@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "react-apollo-hooks";
 import MM06Presenter from "./MM06Presenter";
+import { GET_ALL_NEWSES } from "./MM06Queries";
 
 const MM06Container = () => {
   ///////////////////// - VARIABLE - ////////////////////////
@@ -24,6 +25,8 @@ const MM06Container = () => {
     loading: newsLoading,
     refetch: newsRefetch,
   } = useQuery(GET_ALL_NEWSES);
+
+  console.log(newsDatum);
 
   return <MM06Presenter newsDatum={newsDatum} />;
 };
