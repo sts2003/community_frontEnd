@@ -9,12 +9,12 @@ export const GET_ALL_NEWSES = gql`
     }
   }
 `;
-export const GET_ALL_NEWS_DETAIL = gql`
-  query getAllNewsDetail($id: String!) {
-    getAllNewsDetail(id: $id) {
-      id
-      title
-      description
-    }
-  }
-`;
+// export const GET_ALL_NEWS_DETAIL = gql`
+//   query getAllNewsDetail($id: String!) {
+//     getAllNewsDetail(id: $id) {
+//       id
+//       title
+//       description
+//     }
+//   }
+// `;

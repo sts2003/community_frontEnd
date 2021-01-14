@@ -1,9 +1,26 @@
 import React from "react";
-import {
-  WholeWrapper,
-  CommonButton,
-} from "../../../components/CommonComponents";
+import { WholeWrapper } from "../../../components/CommonComponents";
 import styled from "styled-components";
+
+const EditButton = styled.button`
+  width: 50px;
+  height: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: ${(props) => props.ftColor || `#fff`};
+  background-color: ${(props) => props.bgColor};
+
+  border: 2px solid #55e6c1;
+
+  &:hover {
+    background-color: #fff;
+    color: #55e6c1;
+  }
+`;
 
 const Title = styled.h2`
   font-size: 20px;
@@ -45,7 +62,7 @@ const MM05Presenter = ({ userDatum }) => {
       <Title> 마이 페이지</Title>
       <InputWrapper>
         이름 :
-        <InfoInput type="text" value={JSON.parse("login").name} />
+        <InfoInput type="text" />
       </InputWrapper>
       <InputWrapper>
         닉네임 :
@@ -64,7 +81,9 @@ const MM05Presenter = ({ userDatum }) => {
         <InfoInput type="text" />
       </InputWrapper>
 
-      <CommonButton color={`#777`}>수정</CommonButton>
+      <EditButton bgColor={"#55E6C1"} ftColor={`#fff`}>
+        수정
+      </EditButton>
     </WholeWrapper>
   );
 };

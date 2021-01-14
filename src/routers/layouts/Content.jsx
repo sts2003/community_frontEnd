@@ -7,9 +7,11 @@ import MM03 from "../../routers/MM/MM03";
 import MM04 from "../../routers/MM/MM04";
 import MM05 from "../../routers/MM/MM05";
 import MM06 from "../../routers/MM/MM06";
+import MM07 from "../../routers/MM/MM07";
+import MM08 from "../../routers/MM/MM08";
 import Free_D from "../BOARD_D/Free_D";
 import Popular_D from "../BOARD_D/Popular_D";
-import SimpleSlider from "../../components/Slide";
+
 import styled from "styled-components";
 
 const WholeWrapper = styled.div`
@@ -22,14 +24,18 @@ const Content = () => {
     <WholeWrapper>
       <Route exact path="/" component={MM00} />
       <Route exact path="/popular" component={MM01} />
+      <Route exact path="/popular-detail/:key" component={Popular_D} />
+
       <Route exact path="/freeBoard" component={MM02} />
       <Route exact path="/free-detail/:key" component={Free_D} />
-      <Route exact path="/popular-detail/:key" component={Popular_D} />
+
       <Route exact path="/signin" component={MM03} />
       <Route exact path="/signup" component={MM04} />
+
       <Route exact path="/mypage" component={MM05} />
       <Route exact path="/newsBoard" component={MM06} />
-      <Route exact path="/slide" component={SimpleSlider} />
+      <Route exact path="/anonymousBoard" component={MM07} />
+      <Route exact path="/tipsBoard" component={MM08} />
     </WholeWrapper>
   );
 };

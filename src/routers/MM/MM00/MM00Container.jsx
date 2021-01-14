@@ -45,6 +45,8 @@ const MM00Container = ({ history }) => {
 
   useEffect(() => {
     popularRefetch();
+    newsRefetch();
+    freeRefetch();
   }, [GET_POPULAR_BOARD]);
 
   return (

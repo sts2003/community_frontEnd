@@ -403,7 +403,7 @@ export const CommonButton = styled.button`
   flex-direction: ${(props) => props.dr || `row`};
   align-items: ${(props) => props.al || `center`};
   justify-content: ${(props) => props.ju || `center`};
-  color: #fff;
+  color: ${(props) => props.ftColor || `#fff`};
   box-shadow: 0px 3px 6px #ccc;
   background-color: ${(props) => props.bgColor};
 

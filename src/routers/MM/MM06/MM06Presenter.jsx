@@ -1,5 +1,5 @@
 import React from "react";
-import { WholeWrapper, Wrapper } from "../../../components/CommonComponents";
+import { WholeWrapper } from "../../../components/CommonComponents";
 import styled from "styled-components";
 import { Fade } from "react-reveal";
 
@@ -27,25 +27,26 @@ const NoticeData = styled.div`
 const MM06Presenter = ({ newsDatum }) => {
   return (
     <WholeWrapper width={`100%`} height={`100vh`}>
-      <Board_Wrapper height={`100%`}>NEWS</Board_Wrapper>
-      <NoticeData>
-        {newsDatum ? (
-          newsDatum.length === 0 ? (
-            <Wrapper> 뉴스의 게시글이 없습니다.</Wrapper>
+      <Board_Wrapper height={`100%`}>
+        NEWS
+        <NoticeData mgTop={`10px`}>
+          {newsDatum ? (
+            newsDatum.length === 0 ? (
+              <NoticeData>뉴스의 게시글이 없습니다.</NoticeData>
+            ) : (
+              newsDatum.map((data, idx) => {
+                return (
+                  <Fade bottom delay={idx * 60} key={idx}>
+                    <NoticeData>{data.title}</NoticeData>
+                  </Fade>
+                );
+              })
+            )
           ) : (
-            newsDatum.map((data, idx) => {
-              return (
-                <Fade bottom delay={idx * 60} key={idx}>
-                  <NoticeData>{data.title}</NoticeData>
-                  <NoticeData>{data.description}</NoticeData>
-                </Fade>
-              );
-            })
-          )
-        ) : (
-          <Wrapper>뉴스를 조회하는 중 입니다.</Wrapper>
-        )}
-      </NoticeData>
+            <NoticeData>뉴스를 조회하는 중 입니다.</NoticeData>
+          )}
+        </NoticeData>
+      </Board_Wrapper>
     </WholeWrapper>
   );
 };

@@ -79,9 +79,7 @@ const MM00Presenter = ({
 }) => {
   return (
     <Wrapper dr={`column`} width={`100%`} height={`100%`}>
-      <ImageBox width={`100%`} height={`500px`}>
-        <ThumbNailNews></ThumbNailNews>
-      </ImageBox>
+      <ImageBox width={`100%`} height={`500px`}></ImageBox>
 
       <NewWrapper height={`600px`}>
         {window.sessionStorage.getItem(`login`) ? (

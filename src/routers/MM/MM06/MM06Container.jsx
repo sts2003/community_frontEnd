@@ -28,7 +28,7 @@ const MM06Container = () => {
 
   console.log(newsDatum);
 
-  return <MM06Presenter newsDatum={newsDatum} />;
+  return <MM06Presenter newsDatum={newsDatum && newsDatum.getAllNewses} />;
 };
 
 export default MM06Container;

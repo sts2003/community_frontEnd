@@ -183,8 +183,18 @@ const Header = ({ history }) => {
           >
             뉴스
           </ActionSpan>
-          <ActionSpan fontSize={`17px`}> 익명게시판</ActionSpan>
-          <ActionSpan fontSize={`17px`}> 꿀팁게시판</ActionSpan>
+          <ActionSpan
+            fontSize={`17px`}
+            onClick={() => moveLinkHandler("/anonymousBoard")}
+          >
+            익명게시판
+          </ActionSpan>
+          <ActionSpan
+            fontSize={`17px`}
+            onClick={() => moveLinkHandler("/tipsBoard")}
+          >
+            꿀팁게시판
+          </ActionSpan>
           <ActionSpan fontSize={`17px`}> 통합게시판 </ActionSpan>
           <ActionSpan fontSize={`17px`}> </ActionSpan>
           <ActionSpan fontSize={`17px`}> </ActionSpan>
