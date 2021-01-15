@@ -5,6 +5,8 @@ import { TRY_LOGIN, CHECK_SECRET_CODE, GET_USER } from "./MM03Queries";
 import { useMutation } from "react-apollo-hooks";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MM03Container = ({ history }) => {
   ///////////////////// - VARIABLE - ////////////////////////
@@ -62,7 +64,7 @@ const MM03Container = ({ history }) => {
       });
       setTab(1);
     } else {
-      alert("가입된 이메일이 아닙니다.");
+      toast.info("가입된 이메일이 아닙니다.");
     }
   };
 
@@ -75,14 +77,14 @@ const MM03Container = ({ history }) => {
     });
 
     if (data.checkSecretCode) {
-      alert("로그인 성공 !!");
+      toast.info("로그인 성공 !!");
       window.sessionStorage.setItem(
         "login",
         JSON.stringify((await userData()).data)
       );
       history.push("/");
     } else {
-      alert("인증코드가 잘못되었습니다.");
+      toast.info("인증코드가 잘못되었습니다.");
     }
   };
 

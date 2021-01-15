@@ -10,8 +10,8 @@ import {
 import MM02Presenter from "./MM02Presenter";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+// import { confirmAlert } from "react-confirm-alert";
+// import "react-confirm-alert/src/react-confirm-alert.css";
 import useInput from "../../../hooks/useInput";
 import storageRef from "../../../firebase";
 
@@ -162,7 +162,12 @@ const MM02Container = ({ history }) => {
   };
 
   const moveLinkHandler = (idx) => {
-    history.push(`/free-detail/${idx}`);
+    if (window.sessionStorage.getItem(`login`)) {
+      history.push(`/free-detail/${idx}`);
+    } else {
+      toast.info("로그인 후 이용 가능합니다.");
+      history.push("/signin");
+    }
   };
 
   const prevAndNextPageChangeFreeHandler = (page) => {

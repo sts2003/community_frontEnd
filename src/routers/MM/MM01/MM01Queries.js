@@ -19,6 +19,7 @@ export const GET_POPULAR_DETAIL = gql`
     }
   }
 `;
+
 export const GET_POPULAR_NEXT_ID = gql`
   query getPopularNextId($id: String!) {
     getPopularNextId(id: $id) {

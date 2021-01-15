@@ -9,9 +9,10 @@ import MM05 from "../../routers/MM/MM05";
 import MM06 from "../../routers/MM/MM06";
 import MM07 from "../../routers/MM/MM07";
 import MM08 from "../../routers/MM/MM08";
+import MM09 from "../../routers/MM/MM09";
 import Free_D from "../BOARD_D/Free_D";
 import Popular_D from "../BOARD_D/Popular_D";
-
+import Slide from "../../components/slide/Slide";
 import styled from "styled-components";
 
 const WholeWrapper = styled.div`
@@ -36,6 +37,9 @@ const Content = () => {
       <Route exact path="/newsBoard" component={MM06} />
       <Route exact path="/anonymousBoard" component={MM07} />
       <Route exact path="/tipsBoard" component={MM08} />
+      <Route exact path="/amountBoard" component={MM09} />
+
+      <Route exact path="/slide" component={Slide} />
     </WholeWrapper>
   );
 };

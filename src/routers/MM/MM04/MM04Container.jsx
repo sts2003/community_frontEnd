@@ -3,6 +3,8 @@ import MM04Presenter from "./MM04Presenter";
 import useInput from "../../../hooks/useInput";
 import { REGIST_USER } from "./MM04Queries";
 import { useMutation } from "react-apollo-hooks";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MM04Container = ({ history }) => {
   ///////////////////// - VARIABLE - ////////////////////////
@@ -34,31 +36,31 @@ const MM04Container = ({ history }) => {
 
   const registUserHandler = async () => {
     if (!newName.value || newName.value.trim() === "") {
-      alert("이름은 필수 입력사항 입니다.");
+      toast.info("이름은 필수 입력사항 입니다.");
 
       return;
     }
 
     if (!newEmail.value || newEmail.value.trim() === "") {
-      alert("이메일은 필수 입력사항 입니다.");
+      toast.info("이메일은 필수 입력사항 입니다.");
 
       return;
     }
 
     if (!newNickName.value || newNickName.value.trim() === "") {
-      alert("닉네임은 필수 입력사항 입니다.");
+      toast.info("닉네임은 필수 입력사항 입니다.");
 
       return;
     }
 
     if (!newMobile.value || newMobile.value.trim() === "") {
-      alert("전화번호는 필수 입력사항 입니다.");
+      toast.info("전화번호는 필수 입력사항 입니다.");
 
       return;
     }
 
     if (!newZoneCode.value || newZoneCode.value.trim() === "") {
-      alert("주소는 필수 입력사항 입니다.");
+      toast.info("주소는 필수 입력사항 입니다.");
 
       return;
     }

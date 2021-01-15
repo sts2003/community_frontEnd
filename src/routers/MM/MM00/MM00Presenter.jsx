@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Wrapper, ImageBox } from "../../../components/CommonComponents";
 import { Fade } from "react-reveal";
+import Slide from "../../../components/slide/Slide";
 
 const NewWrapper = styled.div`
   width: 100%;
@@ -79,112 +80,80 @@ const MM00Presenter = ({
 }) => {
   return (
     <Wrapper dr={`column`} width={`100%`} height={`100%`}>
-      <ImageBox width={`100%`} height={`500px`}></ImageBox>
-
+      <ImageBox width={`100%`} height={`500px`}>
+        <Slide />
+      </ImageBox>
       <NewWrapper height={`600px`}>
-        {window.sessionStorage.getItem(`login`) ? (
-          <NoticeWrapper dr={`column`}>
-            <NoticeInfo onClick={() => moveLinkHandler("/popular")}>
-              인기게시판
-            </NoticeInfo>
-            <NoticeData>
-              {popularDatum ? (
-                popularDatum.length === 0 ? (
-                  <Wrapper>게시글이 없습니다.</Wrapper>
-                ) : (
-                  popularDatum.map((data, idx) => {
-                    return (
-                      <Fade bottom delay={idx * 60} key={idx}>
-                        <NoticeData>{data.title}</NoticeData>
-                      </Fade>
-                    );
-                  })
-                )
+        <NoticeWrapper dr={`column`}>
+          <NoticeInfo onClick={() => moveLinkHandler("/popular")}>
+            인기게시판
+          </NoticeInfo>
+          <NoticeData>
+            {popularDatum ? (
+              popularDatum.length === 0 ? (
+                <Wrapper>게시글이 없습니다.</Wrapper>
               ) : (
-                <Wrapper>조회중입니다.</Wrapper>
-              )}
-            </NoticeData>
-          </NoticeWrapper>
-        ) : (
-          <NoticeWrapper dr={`column`}>
-            <NoticeInfo onClick={() => moveLinkHandler("/signin")}>
-              인기게시판
-            </NoticeInfo>
-            <NoticeData>
-              <Wrapper>로그인 후 이용하실 수 있습니다</Wrapper>
-            </NoticeData>
-          </NoticeWrapper>
-        )}
-        {window.sessionStorage.getItem(`login`) ? (
-          <NoticeWrapper dr={`column`}>
-            <NoticeInfo onClick={() => moveLinkHandler("/freeBoard")}>
-              자유게시판
-            </NoticeInfo>
-            <NoticeData>
-              {freeDatum ? (
-                freeDatum.length === 0 ? (
-                  <Wrapper>자유게시판이 없습니다.</Wrapper>
-                ) : (
-                  freeDatum.map((data, idx) => {
-                    return (
-                      <Fade bottom delay={idx * 60} key={idx}>
-                        <NoticeData>{data.title}</NoticeData>
-                      </Fade>
-                    );
-                  })
-                )
+                popularDatum.map((data, idx) => {
+                  return (
+                    <Fade bottom delay={idx * 60} key={idx}>
+                      <NoticeData>{data.title}</NoticeData>
+                    </Fade>
+                  );
+                })
+              )
+            ) : (
+              <Wrapper>조회중입니다.</Wrapper>
+            )}
+          </NoticeData>
+        </NoticeWrapper>
+
+        <NoticeWrapper dr={`column`}>
+          <NoticeInfo onClick={() => moveLinkHandler("/freeBoard")}>
+            자유게시판
+          </NoticeInfo>
+          <NoticeData>
+            {freeDatum ? (
+              freeDatum.length === 0 ? (
+                <Wrapper>자유게시판이 없습니다.</Wrapper>
               ) : (
-                <Wrapper>조회중입니다.</Wrapper>
-              )}
-            </NoticeData>
-          </NoticeWrapper>
-        ) : (
-          <NoticeWrapper dr={`column`}>
-            <NoticeInfo onClick={() => moveLinkHandler("/freeBoard")}>
-              자유게시판
-            </NoticeInfo>
-            <NoticeData>
-              <Wrapper>로그인 후 이용하실 수 있습니다.</Wrapper>
-            </NoticeData>
-          </NoticeWrapper>
-        )}
-        {window.sessionStorage.getItem(`login`) ? (
-          <NoticeWrapper dr={`column`}>
-            <NoticeInfo onClick={() => moveLinkHandler(`/newsBoard`)}>
-              뉴스
-            </NoticeInfo>
-            <NoticeData>
-              {newsDatum ? (
-                newsDatum.length === 0 ? (
-                  <Wrapper>뉴스가 없습니다.</Wrapper>
-                ) : (
-                  newsDatum.map((data, idx) => {
-                    return (
-                      <Fade bottom delay={idx * 60} key={idx}>
-                        <NoticeData
-                          onClick={() => moveLinkHandler("/newsBoard")}
-                        >
-                          {data.title}
-                        </NoticeData>
-                      </Fade>
-                    );
-                  })
-                )
+                freeDatum.map((data, idx) => {
+                  return (
+                    <Fade bottom delay={idx * 60} key={idx}>
+                      <NoticeData>{data.title}</NoticeData>
+                    </Fade>
+                  );
+                })
+              )
+            ) : (
+              <Wrapper>조회중입니다.</Wrapper>
+            )}
+          </NoticeData>
+        </NoticeWrapper>
+
+        <NoticeWrapper dr={`column`}>
+          <NoticeInfo onClick={() => moveLinkHandler(`/newsBoard`)}>
+            뉴스
+          </NoticeInfo>
+          <NoticeData>
+            {newsDatum ? (
+              newsDatum.length === 0 ? (
+                <Wrapper>뉴스가 없습니다.</Wrapper>
               ) : (
-                <Wrapper>조회중입니다.</Wrapper>
-              )}
-            </NoticeData>
-          </NoticeWrapper>
-        ) : (
-          <NoticeWrapper dr={`column`}>
-            <NoticeInfo onClick={() => moveLinkHandler(`/signin`)}>
-              뉴스
-            </NoticeInfo>
-            <NoticeData>
-              <Wrapper>로그인 후 이용하실 수 있습니다.</Wrapper>
-            </NoticeData>
-          </NoticeWrapper>
-        )}
+                newsDatum.map((data, idx) => {
+                  return (
+                    <Fade bottom delay={idx * 60} key={idx}>
+                      <NoticeData onClick={() => moveLinkHandler("/signin")}>
+                        {data.title}
+                      </NoticeData>
+                    </Fade>
+                  );
+                })
+              )
+            ) : (
+              <Wrapper>조회중입니다.</Wrapper>
+            )}
+          </NoticeData>
+        </NoticeWrapper>
       </NewWrapper>
     </Wrapper>
   );

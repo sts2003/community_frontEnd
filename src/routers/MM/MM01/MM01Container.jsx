@@ -8,8 +8,8 @@ import {
 } from "./MM01Queries";
 import MM01Presenter from "./MM01Presenter";
 import { toast } from "react-toastify";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+// import { confirmAlert } from "react-confirm-alert";
+// import "react-confirm-alert/src/react-confirm-alert.css";
 import useInput from "../../../hooks/useInput";
 
 const MM01Container = ({ history }) => {
@@ -112,7 +112,12 @@ const MM01Container = ({ history }) => {
   };
 
   const moveLinkHandler = (idx) => {
-    history.push(`/popular-detail/${idx}`);
+    if (window.sessionStorage.getItem("login")) {
+      history.push(`/popular-detail/${idx}`);
+    } else {
+      toast.info("로그인 후 이용 가능합니다.");
+      history.push(`/signin`);
+    }
   };
 
   const prevAndNextPageChangePopularHandler = (page) => {

@@ -195,7 +195,12 @@ const Header = ({ history }) => {
           >
             꿀팁게시판
           </ActionSpan>
-          <ActionSpan fontSize={`17px`}> 통합게시판 </ActionSpan>
+          <ActionSpan
+            fontSize={`17px`}
+            onClick={() => moveLinkHandler("/amountBoard")}
+          >
+            통합게시판
+          </ActionSpan>
           <ActionSpan fontSize={`17px`}> </ActionSpan>
           <ActionSpan fontSize={`17px`}> </ActionSpan>
           <ActionSpan fontSize={`17px`}> </ActionSpan>

@@ -5,6 +5,7 @@ import GlobalStyles from "../Styles/GlobalStyles";
 import AppRouter from "./AppRouter";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   return (
