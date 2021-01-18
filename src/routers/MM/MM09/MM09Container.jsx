@@ -5,6 +5,8 @@ import {
   GET_POPULAR_BOARD,
   GET_ALL_NEWSES,
   GET_ALL_FREES,
+  GET_ALL_ANONYMOUS,
+  GET_ALL_TIPS,
 } from "./MM09Queries";
 
 const MM00Container = ({ history }) => {
@@ -64,19 +66,41 @@ const MM00Container = ({ history }) => {
     loading: freeLoading,
     refetch: freeRefetch,
   } = useQuery(GET_ALL_FREES);
+
+  const {
+    data: anonyDatum,
+    loading: anonyLoading,
+    refetch: anonyRefetch,
+  } = useQuery(GET_ALL_ANONYMOUS);
+
+  const {
+    data: tipsDatum,
+    loading: tipsLoading,
+    refetch: tipsRefetch,
+  } = useQuery(GET_ALL_TIPS);
   ///////////////////// - USE EFFECT - ///////////////////////
 
   useEffect(() => {
     popularRefetch();
     newsRefetch();
     freeRefetch();
-  }, [GET_POPULAR_BOARD]);
+    anonyRefetch();
+    tipsRefetch();
+  }, [
+    GET_POPULAR_BOARD,
+    GET_ALL_NEWSES,
+    GET_ALL_FREES,
+    GET_ALL_ANONYMOUS,
+    GET_ALL_TIPS,
+  ]);
 
   return (
     <MM09Presenter
       popularDatum={popularDatum && popularDatum.getPopularBoard}
       newsDatum={newsDatum && newsDatum.getAllNewses}
       freeDatum={freeDatum && freeDatum.getFreeBoard}
+      anonyDatum={anonyDatum && anonyDatum.getAllAnonymousBoard}
+      tipsDatum={tipsDatum && tipsDatum.getAllTips}
       movePopularDetailHandler={movePopularDetailHandler}
       moveFreeDetailHandler={moveFreeDetailHandler}
       moveNewsDetailHandler={moveNewsDetailHandler}

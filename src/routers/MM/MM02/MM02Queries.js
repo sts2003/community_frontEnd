@@ -16,6 +16,7 @@ export const GET_FREE_DETAIL = gql`
       _id
       title
       description
+      createdAt
     }
   }
 `;

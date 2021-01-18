@@ -68,7 +68,16 @@ const NewsDataDesc = styled.div`
   justify-content: center;
 `;
 
-const MM06Presenter = ({ newsDatum }) => {
+const NewsDataCreatedAt = styled.div`
+  width: 150px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MM06Presenter = ({ newsDatum, moveLinkHandler }) => {
   return (
     <WholeWrapper width={`100%`} height={`100vh`}>
       <NewsTitle>NEWS</NewsTitle>
@@ -81,7 +90,10 @@ const MM06Presenter = ({ newsDatum }) => {
               newsDatum.map((data, idx) => {
                 return (
                   <Fade bottom delay={idx * 60} key={idx}>
-                    <NewsList>
+                    <NewsList
+                      key={idx}
+                      onClick={() => moveLinkHandler(data._id)}
+                    >
                       <NewsImage
                         src={
                           "https://firebasestorage.googleapis.com/v0/b/leafsts-fileserver.appspot.com/o/4leaf-community%2Fuploads%2FnewsBoard%2F%ED%98%B8%EB%82%98%EC%9A%B0%EB%91%90%20%EC%B6%95%EC%8B%A0%EC%A7%A4.png?alt=media&token=85586c8b-40f7-4d09-bd49-7ccdad8c538f"
@@ -89,6 +101,7 @@ const MM06Presenter = ({ newsDatum }) => {
                       ></NewsImage>
                       <NewsDataTitle>{data.title}</NewsDataTitle>
                       <NewsDataDesc>{data.description}</NewsDataDesc>
+                      <NewsDataCreatedAt>{data.createdAt}</NewsDataCreatedAt>
                     </NewsList>
                   </Fade>
                 );

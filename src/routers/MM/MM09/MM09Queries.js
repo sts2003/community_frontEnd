@@ -29,3 +29,23 @@ export const GET_ALL_NEWSES = gql`
     }
   }
 `;
+
+export const GET_ALL_ANONYMOUS = gql`
+  query getAllAnonymousBoard {
+    getAllAnonymousBoard {
+      _id
+      title
+      description
+    }
+  }
+`;
+
+export const GET_ALL_TIPS = gql`
+  query getAllTips {
+    getAllTips {
+      _id
+      title
+      description
+    }
+  }
+`;

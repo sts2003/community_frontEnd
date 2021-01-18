@@ -22,7 +22,7 @@ const MM07Presenter = ({ anonyDatum }) => {
           ) : (
             anonyDatum.map((data, idx) => {
               return (
-                <DataDiv>
+                <DataDiv key={idx}>
                   {data.title}
                   {data.description}
                 </DataDiv>

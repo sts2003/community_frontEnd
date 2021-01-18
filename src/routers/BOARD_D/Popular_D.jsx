@@ -140,7 +140,7 @@ export default ({ match, history, width }) => {
       let tempData = popularData.getPopularDetail;
 
       console.log(tempData);
-      const desc = document.getElementById("notice_description-js");
+      const desc = document.getElementById("popular_description-js");
 
       if (desc !== null) {
         desc.innerHTML = tempData.description;
@@ -171,7 +171,7 @@ export default ({ match, history, width }) => {
             작성자
           </Board_D_List>
           <Board_D_List width={width < 700 ? `100%` : `calc((100% - 150px))`}>
-            {currentData ? currentData.id : <div>로딩중...</div>}
+            {currentData ? currentData._id : <div>로딩중...</div>}
           </Board_D_List>
           <Board_D_List
             width={width < 700 ? `100%` : `250px`}
@@ -186,7 +186,7 @@ export default ({ match, history, width }) => {
 
         <Board_D_Desc>
           <Wrapper
-            id={"notice_description-js"}
+            id={"popular_description-js"}
             className={"ql-editor"}
           ></Wrapper>
           <Image src={imagePath}></Image>

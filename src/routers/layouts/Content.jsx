@@ -12,6 +12,7 @@ import MM08 from "../../routers/MM/MM08";
 import MM09 from "../../routers/MM/MM09";
 import Free_D from "../BOARD_D/Free_D";
 import Popular_D from "../BOARD_D/Popular_D";
+import News_D from "../BOARD_D/News_D";
 import Slide from "../../components/slide/Slide";
 import styled from "styled-components";
 
@@ -34,7 +35,10 @@ const Content = () => {
       <Route exact path="/signup" component={MM04} />
 
       <Route exact path="/mypage" component={MM05} />
+
       <Route exact path="/newsBoard" component={MM06} />
+      <Route exact path="/news-detail/:key" component={News_D} />
+
       <Route exact path="/anonymousBoard" component={MM07} />
       <Route exact path="/tipsBoard" component={MM08} />
       <Route exact path="/amountBoard" component={MM09} />

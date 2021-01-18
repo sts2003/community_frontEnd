@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-apollo-hooks";
 import MM06Presenter from "./MM06Presenter";
 import { GET_ALL_NEWSES } from "./MM06Queries";
 
-const MM06Container = () => {
+const MM06Container = ({ history }) => {
   ///////////////////// - VARIABLE - ////////////////////////
 
   ///////////////////// - USE STATE - ////////////////////////
@@ -14,8 +14,8 @@ const MM06Container = () => {
 
   ///////////////////// - EVENT HANDLER - /////////////////////
 
-  const moveLinkHandler = (link) => {
-    history.push(link);
+  const moveLinkHandler = (idx) => {
+    history.push(`/news-detail/${idx}`);
   };
 
   ///////////////////// - USE QUERY - ////////////////////////
@@ -26,9 +26,16 @@ const MM06Container = () => {
     refetch: newsRefetch,
   } = useQuery(GET_ALL_NEWSES);
 
-  console.log(newsDatum);
+  useEffect(() => {
+    newsRefetch();
+  }, []);
 
-  return <MM06Presenter newsDatum={newsDatum && newsDatum.getAllNewses} />;
+  return (
+    <MM06Presenter
+      newsDatum={newsDatum && newsDatum.getAllNewses}
+      moveLinkHandler={moveLinkHandler}
+    />
+  );
 };
 
 export default MM06Container;

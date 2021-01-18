@@ -39,7 +39,16 @@ const NoticeData = styled.div`
   margin-top: ${(props) => props.mgTop || `0px`};
 `;
 
-const MM09Presenter = ({ popularDatum, newsDatum, freeDatum }) => {
+const MM09Presenter = ({
+  popularDatum,
+  newsDatum,
+  freeDatum,
+  anonyDatum,
+  tipsDatum,
+  movePopularDetailHandler,
+  moveFreeDetailHandler,
+  moveNewsDetailHandler,
+}) => {
   return (
     <Wrapper width={`100%`} height={`100%`}>
       <BoardTitle>통합게시판</BoardTitle>
@@ -54,7 +63,11 @@ const MM09Presenter = ({ popularDatum, newsDatum, freeDatum }) => {
               popularDatum.map((data, idx) => {
                 return (
                   <Fade bottom delay={idx * 60} key={idx}>
-                    <NoticeData>{data.title}</NoticeData>
+                    <NoticeData
+                      onClick={() => movePopularDetailHandler(data._id)}
+                    >
+                      {data.title}
+                    </NoticeData>
                   </Fade>
                 );
               })
@@ -75,7 +88,9 @@ const MM09Presenter = ({ popularDatum, newsDatum, freeDatum }) => {
               freeDatum.map((data, idx) => {
                 return (
                   <Fade bottom delay={idx * 60} key={idx}>
-                    <NoticeData>{data.title}</NoticeData>
+                    <NoticeData onClick={() => moveFreeDetailHandler(data._id)}>
+                      {data.title}
+                    </NoticeData>
                   </Fade>
                 );
               })
@@ -96,7 +111,7 @@ const MM09Presenter = ({ popularDatum, newsDatum, freeDatum }) => {
               newsDatum.map((data, idx) => {
                 return (
                   <Fade bottom delay={idx * 60} key={idx}>
-                    <NoticeData onClick={() => moveLinkHandler("/signin")}>
+                    <NoticeData onClick={() => moveNewsDetailHandler(data._id)}>
                       {data.title}
                     </NoticeData>
                   </Fade>
@@ -111,10 +126,44 @@ const MM09Presenter = ({ popularDatum, newsDatum, freeDatum }) => {
 
       <NoticeTypeArea>
         <BoardSemiTitle>익명 게시판</BoardSemiTitle>
+        <TypeNoticeDatum>
+          {anonyDatum ? (
+            anonyDatum.length === 0 ? (
+              <Wrapper>익명게시글이 없습니다.</Wrapper>
+            ) : (
+              anonyDatum.map((data, idx) => {
+                return (
+                  <Fade bottom delay={idx * 60} key={idx}>
+                    <NoticeData>{data.title}</NoticeData>
+                  </Fade>
+                );
+              })
+            )
+          ) : (
+            <Wrapper>조회중입니다.</Wrapper>
+          )}
+        </TypeNoticeDatum>
       </NoticeTypeArea>
 
       <NoticeTypeArea>
         <BoardSemiTitle>꿀팁 게시판</BoardSemiTitle>
+        <TypeNoticeDatum>
+          {tipsDatum ? (
+            tipsDatum.length === 0 ? (
+              <Wrapper>꿀팁게시판이 없습니다.</Wrapper>
+            ) : (
+              tipsDatum.map((data, idx) => {
+                return (
+                  <Fade bottom delay={idx * 60} key={idx}>
+                    <NoticeData>{data.title}</NoticeData>
+                  </Fade>
+                );
+              })
+            )
+          ) : (
+            <Wrapper>조회중입니다.</Wrapper>
+          )}
+        </TypeNoticeDatum>
       </NoticeTypeArea>
     </Wrapper>
   );

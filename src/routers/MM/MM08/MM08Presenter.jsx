@@ -21,7 +21,7 @@ const MM08Presenter = ({ tipsDatum }) => {
           ) : (
             tipsDatum.map((data, idx) => {
               return (
-                <DataDiv>
+                <DataDiv key={idx}>
                   {data.title}
                   {data.description}
                 </DataDiv>
