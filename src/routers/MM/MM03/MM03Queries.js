@@ -15,10 +15,13 @@ export const CHECK_SECRET_CODE = gql`
 export const GET_USER = gql`
   mutation getUser($email: String!) {
     getUser(email: $email) {
+      _id
       email
       nickName
       name
       mobile
+      address
+      detailAddress
     }
   }
 `;

@@ -75,7 +75,9 @@ const MM04Container = ({ history }) => {
         address: newAddress.value,
         detailAddress: newDetailAddress.value || `-`,
       },
-    }).then(moveLinkHandler("/signin"));
+    })
+      .then(toast.info("회원가입 성공!"))
+      .then(moveLinkHandler("/signin"));
   };
 
   const searchPostHander = () => {

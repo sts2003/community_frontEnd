@@ -21,12 +21,7 @@ const MM07Presenter = ({ anonyDatum }) => {
             <DataDiv>익명 게시글이 없습니다.</DataDiv>
           ) : (
             anonyDatum.map((data, idx) => {
-              return (
-                <DataDiv key={idx}>
-                  {data.title}
-                  {data.description}
-                </DataDiv>
-              );
+              return <DataDiv key={idx}>{data.title}</DataDiv>;
             })
           )
         ) : (

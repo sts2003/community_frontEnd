@@ -1,5 +1,6 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+//MM Files
 import MM00 from "../../routers/MM/MM00";
 import MM01 from "../../routers/MM/MM01";
 import MM02 from "../../routers/MM/MM02";
@@ -10,11 +11,16 @@ import MM06 from "../../routers/MM/MM06";
 import MM07 from "../../routers/MM/MM07";
 import MM08 from "../../routers/MM/MM08";
 import MM09 from "../../routers/MM/MM09";
+// Detail Files
 import Free_D from "../BOARD_D/Free_D";
 import Popular_D from "../BOARD_D/Popular_D";
+import Anony_D from "../BOARD_D/Anony_D";
 import News_D from "../BOARD_D/News_D";
+////////////// - Other - ////////////////
 import Slide from "../../components/slide/Slide";
 import styled from "styled-components";
+// import Header from "./Header";
+// import Footer from "./Footer";
 
 const WholeWrapper = styled.div`
   width: 100%;
@@ -40,6 +46,8 @@ const Content = () => {
       <Route exact path="/news-detail/:key" component={News_D} />
 
       <Route exact path="/anonymousBoard" component={MM07} />
+      <Route exact path="/anony-detail/:key" component={Anony_D} />
+
       <Route exact path="/tipsBoard" component={MM08} />
       <Route exact path="/amountBoard" component={MM09} />
 

@@ -5,6 +5,7 @@ import Fade from "react-reveal/Fade";
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 500px;
   padding: 40px;
 
   display: flex;

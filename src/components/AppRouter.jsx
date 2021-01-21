@@ -3,15 +3,13 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "../routers/layouts/Header";
 import Content from "../routers/layouts/Content";
 import Footer from "../routers/layouts/Footer";
-import AdminHeader from "../routers/admin/adminLayout/AdminHeader";
-import AdminContent from "../routers/admin/adminLayout/AdminContent";
+import AdminMain from "../routers/admin/adminLayout/AdminMain";
 
 const AppRouter = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/admin" component={AdminHeader} />
-        <Route exact path="/admin" component={AdminContent} />
+        <Route path="/admin" component={AdminMain} />
       </Switch>
 
       <Route path="/" component={Header} />

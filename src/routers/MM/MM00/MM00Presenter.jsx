@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Wrapper, ImageBox } from "../../../components/CommonComponents";
 import { Fade } from "react-reveal";
 import Slide from "../../../components/slide/Slide";
+import Header from "../../layouts/Header";
+import Footer from "../../layouts/Footer";
 
 const NewWrapper = styled.div`
   width: 100%;

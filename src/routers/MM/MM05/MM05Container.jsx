@@ -3,19 +3,23 @@ import { useQuery, useMutation } from "react-apollo-hooks";
 import MM05Presenter from "./MM05Presenter";
 import { GET_USER_DETAIL, DELETE_USER, UPDATE_USER } from "./MM05Queries";
 import { toast } from "react-toastify";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
-const MM05Container = ({ match }) => {
+const MM05Container = ({ history }) => {
   ///////////////////// - VARIABLE - ////////////////////////
 
   ///////////////////// - USE STATE - ////////////////////////
   // const [currentData, setCurrentData] = useState(null);
-  const userDatum = useState(window.sessionStorage.getItem("login"));
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const userDatum = useState(window.sessionStorage.getItem("login"));
   const [value, setValue] = useState({
     email: "",
     name: "",
     nickName: "",
     mobile: "",
+    address: "",
+    detailAddress: "",
   });
   /////////////////////// - USE REF - /////////////////////////
 
@@ -56,21 +60,40 @@ const MM05Container = ({ match }) => {
     setValue(nextState);
   };
 
+  const userId = JSON.parse(userDatum[0]).getUser._id;
   const userDelete = async () => {
-    const _id = JSON.parse(userDatum[0]).getUser._id;
-    if (_id === userDetailData.getUserDetail._id) {
-      const ask = confirm("삭제 하시겠습니다?");
-      if (ask) {
-        const { data } = await deleteUserMutation({
-          variables: {
-            id: _id,
+    if (userId === userDetailData.getUserDetail._id) {
+      confirmAlert({
+        title: "DELETE USER",
+        message: "삭제하시겠습니까 ?",
+        buttons: [
+          {
+            label: "취소",
+            onClick: () => {
+              return false;
+            },
           },
-        });
-      } else {
-        toast.error("삭제 취소");
-      }
+          {
+            label: "확인",
+            onClick: () => deleteUserHandler(userId),
+          },
+        ],
+      });
+    }
+  };
+  const deleteUserHandler = async (userId) => {
+    const { data } = await deleteUserMutation({
+      variables: {
+        id: userId,
+      },
+    });
+
+    if (data.deleteUser) {
+      toast.info("성공적으로 처리 되었습니다.");
+      window.sessionStorage.removeItem("login");
+      history.push("/");
     } else {
-      toast.error("삭제 실패");
+      toast.error("잠시후 다시 시도해 주세요.");
     }
   };
 
@@ -84,6 +107,8 @@ const MM05Container = ({ match }) => {
           name: value.name,
           nickName: value.nickName,
           mobile: value.mobile,
+          address: value.address,
+          detailAddress: value.detailAddress,
         },
       });
       console.log(data);
@@ -103,10 +128,12 @@ const MM05Container = ({ match }) => {
     setIsDialogOpen(!isDialogOpen);
     if (!isDialogOpen) {
       setValue({
-        email: JSON.parse(userDetailData[0]).getUser.email,
-        name: JSON.parse(userDetailData[0]).getUser.name,
-        nickName: JSON.parse(userDetailData[0]).getUser.nickName,
-        mobile: JSON.parse(userDetailData[0]).getUser.mobile,
+        email: JSON.parse(userDatum[0]).getUser.email,
+        name: JSON.parse(userDatum[0]).getUser.name,
+        nickName: JSON.parse(userDatum[0]).getUser.nickName,
+        mobile: JSON.parse(userDatum[0]).getUser.mobile,
+        address: JSON.parse(userDatum[0]).getUser.address,
+        detailAddress: JSON.parse(userDatum[0]).getUser.detailAddress,
       });
     }
   };
@@ -119,8 +146,11 @@ const MM05Container = ({ match }) => {
       valueName={value.name}
       valueNickName={value.nickName}
       valueMobile={value.mobile}
+      valueAddress={value.address}
+      valueDetailAddress={value.detailAddress}
       _valueChangeHandler={_valueChangeHandler}
       _isDialogOpenToggle={_isDialogOpenToggle}
+      isDialogOpen={isDialogOpen}
       userDelete={userDelete}
       userUpdate={userUpdate}
     />

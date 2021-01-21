@@ -33,6 +33,10 @@ const FooterWrapper = styled.div`
   height: ${(props) => props.height || `100%`};
 
   cursor: pointer;
+
+  &:hover {
+    font-weight: 700;
+  }
 `;
 
 const TextBox = styled.div`
@@ -63,7 +67,11 @@ const Footer = ({ history }) => {
       <FooterAreaTop>이용약관</FooterAreaTop>
       <FooterAreaContent>
         <FooterWrapper width={`450px`}>
-          <FooterWrapper width={`100%`} height={`50%`}>
+          <FooterWrapper
+            width={`100%`}
+            height={`50%`}
+            onClick={() => _moveLinkHandler("/")}
+          >
             LOGO가 들어갈 자리 입니다.
           </FooterWrapper>
           <FooterWrapper width={`100%`} height={`50%`}>
@@ -90,13 +98,13 @@ const Footer = ({ history }) => {
           </FooterWrapper>
           <FooterWrapper
             width={`100%`}
-            onClick={() => _moveLinkHandler("/free")}
+            onClick={() => _moveLinkHandler("/freeBoard")}
           >
             자유 게시판
           </FooterWrapper>
           <FooterWrapper
             width={`100%`}
-            onClick={() => _moveLinkHandler("/news")}
+            onClick={() => _moveLinkHandler("/newsBoard")}
           >
             뉴스
           </FooterWrapper>
